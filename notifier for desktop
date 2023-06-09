@@ -1,0 +1,47 @@
+from tkinter import *
+from PIL import Image,ImageTk
+from plyer import notification
+from tkinter import messagebox
+import time
+
+
+window=Tk()
+window.title("Notifier-app")
+window.geometry("500x300")
+window.resizable(0,0)
+
+def get_details():
+    get_title=title.get()
+    get_msg=msg.get()
+    get_time= time1.get()
+    
+    if get_title==""or get_msg==""or get_time=="":
+        messagebox.showerror("Alert","All fields are required!")
+    else:
+        int_time=int(float(get_time))
+        min_to_sec=int_time*60
+        messagebox.showinfo("notifier set","set notification")
+        
+        time.sleep(min_to_sec)
+        notification.notify(title="get_title",
+                            message="get_msg",
+                            app_name="notifier",
+                            timeout=10)
+        
+        
+
+noty=Label(window,text="NOTIFIER:APP FOR DESKTOP",font=("poppins",20,"bold"),fg="#528DFF",bg="light grey").place(x=50,y=20)
+t_label=Label(window,text="Title to notify",font=("poppins",10)).place(x=12,y=78)
+title=Entry(window,width=25,font=("poppins",13))
+title.place(x=123,y=78)
+m_label=Label(window,text="Display Message",font=("poppins",10)).place(x=12,y=120)
+
+msg=Entry(window,width=40,font=("poppins",13))
+msg.place(x=123,y=120)
+
+time_label=Label(window,text="Set Time",font=("poppins",10)).place(x=12,y=175)
+time1=Entry(window,width=5,font=("poppins",13))
+time1.place(x=80,y=175)
+time_min_label=Label(window,text="min",font=("poppins",10)).place(x=130,y=175)
+but=Button(window,text="SET NOTIFICATION",font=("poppins",10,"bold"),fg="#ffffff",bg="#528DFF",width=20,relief="raised",command=get_details).place(x=170,y=230)
+window.mainloop()
